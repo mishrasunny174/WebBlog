@@ -5,10 +5,11 @@ from datetime import datetime
 
 
 class Blog(object):
-    def __init__(self, title, author, description, date=datetime.utcnow(), _id=uuid.uuid4().hex):
+    def __init__(self, title, author, description, author_id, date=datetime.utcnow(), _id=uuid.uuid4().hex):
         self.title = title
         self.author = author
         self.description = description
+        self.author_id = author_id
         self.date = date
         self._id = _id
 
@@ -16,6 +17,7 @@ class Blog(object):
         return {'title': self.title,
                 'author': self.author,
                 'description': self.description,
+                'author_id': self.author_id,
                 'date': self.date,
                 '_id': self._id}
 
@@ -35,6 +37,6 @@ class Blog(object):
         return cls(**blog_data)
 
     @classmethod
-    def get_all_blogs(cls):
-        blogs = Database.find(collection='blogs', query={})
+    def blogs_by_author_id(cls, author_id):
+        blogs = Database.find(collection='blogs', query={'author_id': author_id})
         return [cls(**blog) for blog in blogs]
