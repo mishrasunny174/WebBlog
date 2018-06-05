@@ -25,7 +25,7 @@ class Post:
 
     @classmethod
     def from_mongo(cls, _id):
-        post_data = Database.find(collection='posts', query={'_id': _id})
+        post_data = Database.find_one(collection='posts', query={'_id': _id})
         return cls(**post_data)
 
     @classmethod
