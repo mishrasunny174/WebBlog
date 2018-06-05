@@ -30,4 +30,4 @@ class Post:
 
     @classmethod
     def get_posts_by_blog_id(cls, blog_id):
-        return [post for post in Database.find(collection='posts', query={'blog_id': blog_id})]
+        return [cls(**post) for post in Database.find(collection='posts', query={'blog_id': blog_id})]
