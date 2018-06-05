@@ -3,8 +3,8 @@ from datetime import datetime
 import uuid
 
 
-class Post(object):
-    def __init__(self, title, content, author, blog_id, date=datetime.utcnow(), _id=uuid.uuid4().hex()):
+class Post:
+    def __init__(self, title, content, author, blog_id, date=datetime.utcnow(), _id=uuid.uuid4().hex):
         self.title = title
         self.content = content
         self.author = author
