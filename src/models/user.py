@@ -36,11 +36,11 @@ class User(object):
         return False  # return false if user doesn't exist with passed email
 
     @classmethod
-    def register(cls, email, password):
+    def register(cls, name, email, password):
         user = cls.get_user_by_email(email)
         if user is None:
             # user doesn't exist we can create a new user with this email
-            new_user = cls(email=email, password=password)
+            new_user = cls(name=name, email=email, password=password)
             new_user.save_to_mongo()
             session['email'] = email
             return True

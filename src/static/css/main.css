@@ -1,4 +1,15 @@
 #login_form {
     margin-top: 25px
+}
 
+.register-form{
+    max-width: 700px
+}
+
+.header{
+    text-align: center
+}
+
+.center-horizontal{
+    horizontal-align: center
 }
