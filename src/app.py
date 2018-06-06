@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect
 
 from src.models.blog import Blog
 from src.models.user import User
@@ -72,7 +72,31 @@ def list_blog(user_id=None):
 def list_post(blog_id):
     blog = Blog.from_mongo(blog_id)
     posts = blog.get_all_posts()
-    return render_template('user_posts.html', posts=posts, name_of_blog=blog.title)
+    return render_template('user_posts.html', posts=posts, name_of_blog=blog.title, blog_id=blog._id)
+
+
+@app.route('/blogs/new', methods=['POST', 'GET'])
+def create_new_blog():
+    if request.method == 'GET':
+        return render_template('new_blog.html')
+    else:
+        title = request.form['title']
+        description = request.form['description']
+        user = User.get_user_by_email(session['email'])
+        user.new_blog(title, description)
+        return redirect('/blogs/')
+
+
+@app.route('/posts/new/<string:blog_id>', methods=['POST', 'GET'])
+def create_new_post(blog_id):
+    if request.method == 'GET':
+        return render_template('new_post.html', blog_id=blog_id)
+    else:
+        title = request.form['title']
+        content = request.form['content']
+        user = User.get_user_by_email(session['email'])
+        user.new_post(title=title, content=content, blog_id=blog_id)
+        return redirect('/posts/'+blog_id)
 
 
 if __name__ == '__main__':

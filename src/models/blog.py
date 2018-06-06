@@ -21,8 +21,8 @@ class Blog(object):
                 'date': self.date,
                 '_id': self._id}
 
-    def new_post(self, title, content, date, _id):
-        post = Post(title=title, content=content, author=self.author, blog_id=self._id, date=date, _id=_id)
+    def new_post(self, title, content):
+        post = Post(title=title, content=content, author=self.author, blog_id=self._id)
         post.save_to_mongo()
 
     def get_all_posts(self):

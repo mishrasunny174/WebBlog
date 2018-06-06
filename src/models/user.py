@@ -64,9 +64,9 @@ class User(object):
         blog.save_to_mongo()
 
     @staticmethod
-    def new_post(blog_id, title, content, date=datetime.utcnow()):
+    def new_post(blog_id, title, content):
         blog = Blog.from_mongo(blog_id)
-        blog.new_post(title=title, content=content, date=date)
+        blog.new_post(title=title, content=content)
 
     def json(self):
         return {'name': self.name,
