@@ -99,5 +99,15 @@ def create_new_post(blog_id):
         return redirect('/posts/'+blog_id)
 
 
+@app.route('/auth/logout/')
+def log_user_out():
+    session['email'] = None
+    return render_template('index.html')
+
+@app.route('/blogs/search', methods=['POST'])
+def search_blogs_by_name():
+    pass
+
+
 if __name__ == '__main__':
     app.run()

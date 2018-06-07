@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blog</title>
+    <title>Web Blog</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
@@ -18,10 +18,24 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="card">
-    <div class="card-header header">Web Blog</div>
-    {% block content %}
-    {% endblock %}
-</div>
+<nav id="navigation-bar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Web Blog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="/blogs/" class="nav-link">My blogs</a>
+    <a href="/blogs/new" class="nav-link">New blog</a>
+    <div id="search-div">
+        <form class="form-inline my-2 my-lg-0" action="/blogs/search/" methode="post">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search Blogs" aria-label="Search"
+                   name="search_query">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+    <a href="/auth/logout" id="log-out-link" class="nav-link right">Log out</a>
+</nav>
+{% block content %}
+{% endblock %}
 </body>
 </html>
