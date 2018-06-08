@@ -1,19 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-    <h2>{{ name_of_blog }}</h2>
+    <div class="container mt-2">
+        <div class="row" style="margin: auto">
+            <div class="col-sm-11">
+                <h2 class="center-text">{{ name_of_blog }}</h2>
+            </div>
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-outline-success">New Post</button>
+            </div>
+        </div>
+    </div>
     {% if posts|length > 0 %}
     {% for post in posts %}
-    <h3>{{ post.title }}</h3>
-    <p>{{ post.content }}</p>
-    <p>{{ post.author }}</p>
-    <hr>
+    <div class="col-sm-6" style="margin: auto">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{ post.title }}</h3>
+                <p class="card-text">{{ post.content }}</p>
+                <p class="card-sub-title"> - {{ post.author }}</p>
+            </div>
+        </div>
+    </div>
     {% endfor %}
     {% else %}
-    <h3>There aren't any posts yet!</h3>
+    <h3 class="center-text">There aren't any posts yet!</h3>
     {% endif %}
-    <a href="/posts/new/{{blog_id}}">
-        <button type="button" class="btn btn-primary">New Post</button>
-    </a>
 </div>
 {% endblock %}

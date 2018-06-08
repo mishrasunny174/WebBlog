@@ -17,3 +17,19 @@
 .right{
     margin-left: 30%
 }
+
+.right-adjusted{
+    margin-left: 50%
+}
+
+.right-adjusted-signup{
+    margin-left: 66%
+}
+
+.center-text{
+    text-align: center
+}
+
+.index-body{
+    background-color: #FF7F50
+}

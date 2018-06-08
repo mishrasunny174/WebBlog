@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-    <h2 class="center-text my-2" style="margin: auto">{{ name }}'s Blogs</h2>
     {% if blogs|length > 0 %}
     {% for blog in blogs %}
     <div class="col-sm-6" style="margin: auto">

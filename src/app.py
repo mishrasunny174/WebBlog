@@ -18,7 +18,8 @@ def initialize():
 def home():
     if session['email'] is not None:
         user = User.get_user_by_email(session['email'])
-        return render_template("profile.html", name=user.name)
+        blogs = user.get_blogs()
+        return render_template("user_blogs.html", name=user.name, blogs=blogs)
     else:
         return render_template("index.html")
 
@@ -41,7 +42,7 @@ def login_user():
     if User.login_valid(email=email, password=password):
         User.login(user_email=email)
         user = User.get_user_by_email(session['email'])
-        return render_template('profile.html', name=user.name)
+        return render_template('user_blogs.html', name=user.name)
     else:
         session['email'] = None
         return 'ERROR: User Does not exist!'
@@ -54,7 +55,7 @@ def register_user():
     name = request.form['name']
     User.register(name=name, email=email, password=password)
     user = User.get_user_by_email(session['email'])
-    return render_template('profile.html', name=user.name)
+    return render_template('user_blogs.html', name=user.name)
 
 
 @app.route('/blogs/<string:user_id>')
@@ -102,11 +103,14 @@ def create_new_post(blog_id):
 @app.route('/auth/logout/')
 def log_user_out():
     session['email'] = None
-    return render_template('index.html')
+    return redirect('/')
 
-@app.route('/blogs/search', methods=['POST'])
+
+@app.route('/blogs/search/', methods=['POST'])
 def search_blogs_by_name():
-    pass
+    keyword = request.form['keyword']
+    blogs = Blog.get_by_keyword(keyword=keyword)
+    return render_template('list_blogs.html', blogs=blogs)
 
 
 if __name__ == '__main__':

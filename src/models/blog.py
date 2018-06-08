@@ -40,3 +40,8 @@ class Blog(object):
     def blogs_by_author_id(cls, author_id):
         blogs = Database.find(collection='blogs', query={'author_id': author_id})
         return [cls(**blog) for blog in blogs]
+
+    @classmethod
+    def get_by_keyword(cls, keyword):
+        blogs = Database.find(collection='blogs', query={'title': keyword})
+        return [cls(**blog) for blog in blogs]
