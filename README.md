@@ -1,2 +1,2 @@
 # WebBlog
-A full blown web blogging application written in python
+A full blown web blogging application written in python, html and css
